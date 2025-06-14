@@ -12,10 +12,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: list all the files
         run: ls -l
-      - name: zip a files
-        run: zip python.zip lambda_function.python
+      - name: zip a file
+        run: zip python.zip lambda_function.py
       - name: list all the files
         run: ls -l
       - name: aws cli commands
         run: aws lambda update-function-code --function-name GitHubworkflowfunction --zip-file fileb://python.zip --region ap-south-1
+        env: 
+          AWS_ACCESS_KEY_IP: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     
